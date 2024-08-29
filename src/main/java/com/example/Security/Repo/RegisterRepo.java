@@ -8,9 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface RegisterRepo extends JpaRepository<Register, Long> {
-//    Users findByUsername(@Param("username") String username);
-//    Register findByUsername(String username);
+
     Optional<Register> findById(Long id);
-    Register findByEmail(String email);
+    public Register findByEmail(String email);
 
 }

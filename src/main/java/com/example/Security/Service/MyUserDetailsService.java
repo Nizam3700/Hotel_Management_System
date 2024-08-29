@@ -1,6 +1,5 @@
 package com.example.Security.Service;
 
-import com.example.Security.Model.UserPrincipal;
 import com.example.Security.Model.Register;
 import com.example.Security.Repo.RegisterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
             System.out.println("Email Not Found !!!");
             throw  new UsernameNotFoundException("Email Not Found");
         }
-        return new UserPrincipal(email);
+
+        return email;
     }
 }
