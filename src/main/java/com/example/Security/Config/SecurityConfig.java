@@ -4,6 +4,7 @@ import com.example.Security.Service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.CachingUserDetailsService;
@@ -31,7 +32,9 @@ public class SecurityConfig {
 
 
     @Bean
+    @Primary
     public UserDetailsService userDetailsService(){
+
         return new MyUserDetailsService();
     }
     @Autowired

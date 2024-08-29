@@ -5,13 +5,11 @@ import com.example.Security.Model.Register;
 import com.example.Security.Service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-//@RequestMapping("/register")
 public class RegisterController {
 
     @Autowired
@@ -20,6 +18,7 @@ public class RegisterController {
 
     @PostMapping("/userlogin")
     public String login(@RequestBody Login login){
+
         return registerService.verify(login);
     }
     @PostMapping("/register")
