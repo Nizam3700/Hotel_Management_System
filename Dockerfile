@@ -1,22 +1,34 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-alpine
-
-# Set environment variables for MySQL and JWT
-ENV SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hotel
-ENV SPRING_DATASOURCE_USERNAME=root
-ENV SPRING_DATASOURCE_PASSWORD=Nizam@143
-#ENV JWT_SECRET=357638792F423F4428472B4B6250655368566D597133743677397A2443264629
-#ENV JWT_EXPIRATION=1800000
-
-# Set the working directory inside the container
+# Stage 1: Build the application using Gradle
+FROM gradle:7.2.0-jdk17 AS build
 WORKDIR /app
 
-# Copy the build files (assuming you use the Spring Boot jar file)
-#COPY --build/libs/Security-0.0.1-SNAPSHOT.jar app.jar
-COPY --from=build /app/build/libs/Security-0.0.1-SNAPSHOT.jar app.jar
+# Copy Gradle project files
+COPY . .
 
-# Expose the port on which your Spring Boot app runs (custom port 8081 in this case)
+RUN chmod +x ./gradlew
+
+# Build the project
+RUN ./gradlew clean build -x test
+
+
+# Stage 2: Create a minimal image for running the Spring Boot application
+FROM openjdk:17.0.1-jdk-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy the built jar file from the previous stage
+COPY --from=build /app/build/libs/*.jar app.jar
+
+# Expose the port your application will run on
 EXPOSE 8081
+
+# Set environment variables for MySQL
+ENV MYSQL_DBNAME=hotel
+ENV MYSQL_USERNAME=root
+ENV MYSQL_PASSWORD=Nizam@143
+ENV MYSQL_URL=jdbc:mysql://192.168.29.168
+ENV MYSQL_PORT=3306
 
 # Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
