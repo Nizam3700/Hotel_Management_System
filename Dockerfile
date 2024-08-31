@@ -12,7 +12,8 @@ ENV SPRING_DATASOURCE_PASSWORD=Nizam@143
 WORKDIR /app
 
 # Copy the build files (assuming you use the Spring Boot jar file)
-COPY build/libs/Security-0.0.1-SNAPSHOT.jar app.jar
+#COPY --build/libs/Security-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/build/libs/Security-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port on which your Spring Boot app runs (custom port 8081 in this case)
 EXPOSE 8081
