@@ -24,11 +24,17 @@ COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8081
 
 # Set environment variables for MySQL
-ENV MYSQL_DBNAME=hotel
-ENV MYSQL_USERNAME=root
-ENV MYSQL_PASSWORD=Nizam@143
-ENV MYSQL_URL=jdbc:mysql://192.168.29.168
-ENV MYSQL_PORT=3306
+#ENV MYSQL_DBNAME=hotel
+#ENV MYSQL_USERNAME=root
+#ENV MYSQL_PASSWORD=Nizam@143
+#ENV MYSQL_URL=jdbc:mysql://192.168.29.168
+#ENV MYSQL_PORT=3306
+
+ENV MYSQl_DBNAME=defaultdb
+ENV MYSQL_USERNAME=avnadmin
+ENV MYSQL_PASSWORD=AVNS_TgDsSNoiJAL60YDVnVd
+ENV MYSQL_URL=jdbc:mysql://mysql-1ae1a222-nizamuddin8637-1ba4.h.aivencloud.com
+ENV MYSQL_PORT=22346
 
 # Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
