@@ -31,12 +31,14 @@ public class Register implements UserDetails {
     private String password;
     private Role role = Role.CUSTOMER;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         var role = new SimpleGrantedAuthority("ROLE_" + this.role.name());
         return List.of(role);
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return email;
