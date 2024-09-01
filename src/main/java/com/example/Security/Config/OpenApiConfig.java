@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
                 description = "# Key Features\n"+
                         "* First Register, Important (email & password)\n" +
                         "* Customer, Admin, Manager can Login using (email & password)\n" +
-                        "* JWT Token get after Login, when you can access any Apis, Access Denied for Specific Role\n",
+                        "* JWT Token get after Login, Then you can access any Apis, Access Denied for Specific Role\n",
                 contact = @Contact(
                         url = "https://www.linkedin.com/in/nizam3700"
 
